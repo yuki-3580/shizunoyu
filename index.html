@@ -1,16 +1,51 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+    <!-- メタタグ -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="しずの湯 - Open to recovery 疲労の抜けない日常生活に、回復する習慣を">
+    
+    <!-- プリロード -->
+    <link rel="preload" href="/css/style.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" as="style">
+    <link rel="preload" href="/images/logo.png" as="image" type="image/png">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- タイトル -->
     <title>しずの湯</title>
+    
+    <!-- スタイルシート -->
     <link rel="stylesheet" href="/css/style.css">
+
+    <!-- インライン重要なスタイル -->
+    <style>
+        .header-logo {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+            max-width: none;
+        }
+        @media (min-width: 768px) {
+            .header-logo {
+                height: 60px;
+            }
+        }
+    </style>
 </head>
 <body>
+    <!-- ヘッダー -->
     <header class="header">
         <div class="header-content">
-            <img src="/images/logo.png" alt="Serenity Sauna Logo" class="header-logo">
-            <button class="menu-toggle" aria-label="メニューを開く">
+            <img src="/images/logo.png" 
+                 alt="しずの湯 ロゴ" 
+                 class="header-logo"
+                 width="50"
+                 height="50">
+            <button class="menu-toggle" 
+                    aria-label="メニューを開く"
+                    aria-expanded="false"
+                    aria-controls="nav-menu">
                 <span class="menu-line"></span>
                 <span class="menu-line"></span>
                 <span class="menu-line"></span>
@@ -18,7 +53,8 @@
         </div>
     </header>
 
-    <nav class="nav-menu">
+    <!-- ナビゲーション -->
+    <nav class="nav-menu" id="nav-menu" aria-hidden="true">
         <ul class="nav-list">
             <li><a href="#hours" class="nav-link">営業時間</a></li>
             <li><a href="#price" class="nav-link">料金</a></li>
@@ -26,142 +62,262 @@
             <li><a href="#contact" class="nav-link">お問い合わせ</a></li>
         </ul>
         <div class="nav-footer">
-            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="nav-social-link">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="social-icon"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            <a href="https://www.instagram.com/shizu_sagamihara/" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="nav-social-link"
+               aria-label="Instagram">
+                <svg xmlns="http://www.w3.org/2000/svg" 
+                     width="32" 
+                     height="32" 
+                     viewBox="0 0 24 24" 
+                     fill="none" 
+                     stroke="currentColor" 
+                     stroke-width="2" 
+                     stroke-linecap="round" 
+                     stroke-linejoin="round" 
+                     class="social-icon"
+                     aria-hidden="true">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
             </a>
         </div>
     </nav>
 
+    <!-- ヒーローセクション -->
     <div class="hero">
-        <img src="images/top.png" alt="Luxurious Sauna Interior">
+        <img src="/images/top.png" 
+             alt="サウナ内装" 
+             width="1920"
+             height="1080"
+             loading="eager">
         <div class="scroll-indicator">
             <span class="scroll-text">Scroll</span>
-            <div class="scroll-line"></div>
+            <div class="scroll-line" aria-hidden="true"></div>
         </div>
     </div>
 
-    <!-- 施設情報 -->
-    <section id="hours" class="section">
-        <div class="info-grid">
-            <div class="info-content">
-                <div class="info-item">
-                    <div class="info-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    <!-- メインコンテンツ -->
+    <main>
+        <!-- 営業時間・料金セクション -->
+        <section id="hours" class="section">
+            <div class="info-grid">
+                <div class="info-content">
+                    <!-- 営業時間 -->
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" 
+                                 width="24" 
+                                 height="24" 
+                                 viewBox="0 0 24 24" 
+                                 fill="none" 
+                                 stroke="currentColor" 
+                                 stroke-width="2" 
+                                 stroke-linecap="round" 
+                                 stroke-linejoin="round"
+                                 aria-hidden="true">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3>営業時間</h3>
+                            <p>平日: 10:00 - 23:00<br>土日祝: 9:00 - 24:00</p>
+                        </div>
                     </div>
-                    <div>
-                        <h3>営業時間</h3>
-                        <p>平日: 10:00 - 23:00<br>土日祝: 9:00 - 24:00</p>
+
+                    <!-- 料金 -->
+                    <div id="price" class="info-item">
+                        <div class="info-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" 
+                                 width="24" 
+                                 height="24" 
+                                 viewBox="0 0 24 24" 
+                                 fill="none" 
+                                 stroke="currentColor" 
+                                 stroke-width="2" 
+                                 stroke-linecap="round" 
+                                 stroke-linejoin="round"
+                                 aria-hidden="true">
+                                <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/>
+                                <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/>
+                                <path d="M18 12H7"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3>料金</h3>
+                            <p>一律 1,150円</p>
+                        </div>
                     </div>
                 </div>
+                <div class="exterior-image">
+                    <img src="/images/gaikan.jpg" 
+                         alt="施設外観" 
+                         class="facility-image"
+                         width="800"
+                         height="600"
+                         loading="lazy">
+                </div>
+            </div>
+        </section>
 
-                <div id="price" class="info-item">
-                    <div class="info-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12H7"/></svg>
+        <!-- アクセスセクション -->
+        <section id="access" class="section">
+            <div class="info-grid">
+                <div class="info-content">
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" 
+                                 width="24" 
+                                 height="24" 
+                                 viewBox="0 0 24 24" 
+                                 fill="none" 
+                                 stroke="currentColor" 
+                                 stroke-width="2" 
+                                 stroke-linecap="round" 
+                                 stroke-linejoin="round"
+                                 aria-hidden="true">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3>アクセス</h3>
+                            <p>〒252-0001<br>神奈川県座間市相模が丘3丁目67-10<br>小田急相模原駅から徒歩約12分</p>
+                        </div>
                     </div>
-                    <div>
-                        <h3>料金</h3>
-                        <p>一律 1,150円</p>
+                </div>
+                <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3247.8664894467656!2d139.4235096!3d35.507579400000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018ff1edeb8b52b%3A0x7ec6524895ca911b!2z44CSMjUyLTAwMDEg56We5aWI5bed55yM5bqn6ZaT5biC55u45qih44GM5LiY77yT5LiB55uu77yW77yX4oiS77yR77yQ!5e0!3m2!1sja!2sjp!4v1736052011986!5m2!1sja!2sjp"
+                            width="100%"
+                            height="100%"
+                            style="border:0;"
+                            allowfullscreen=""
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Google Maps - しずの湯の所在地">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- お問い合わせセクション -->
+        <section id="contact" class="section">
+            <div class="info-grid">
+                <div class="info-content">
+                    <div class="info-item">
+                        <div class="info-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" 
+                                 width="24" 
+                                 height="24" 
+                                 viewBox="0 0 24 24" 
+                                 fill="none" 
+                                 stroke="currentColor" 
+                                 stroke-width="2" 
+                                 stroke-linecap="round" 
+                                 stroke-linejoin="round"
+                                 aria-hidden="true">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3>お問い合わせ</h3>
+                            <p>03-1234-5678</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="exterior-image">
-                <img src="images/gaikan.jpg" alt="施設外観" class="facility-image">
-            </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- アクセス -->
-    <section id="access" class="section">
-        <div class="info-grid">
-            <div class="info-content">
-                <div class="info-item">
-                    <div class="info-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                    </div>
-                    <div>
-                        <h3>アクセス</h3>
-                        <p>〒252-0001<br>神奈川県座間市相模が丘3丁目67-10<br>小田急相模原駅から徒歩約12分</p>
-                    </div>
-                </div>
-            </div>
-            <div class="map-container">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3247.8664894467656!2d139.4235096!3d35.507579400000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6018ff1edeb8b52b%3A0x7ec6524895ca911b!2z44CSMjUyLTAwMDEg56We5aWI5bed55yM5bqn6ZaT5biC55u45qih44GM5LiY77yT5LiB55uu77yW77yX4oiS77yR77yQ!5e0!3m2!1sja!2sjp!4v1736052011986!5m2!1sja!2sjp"
-                    width="100%"
-                    height="100%"
-                    style="border:0;"
-                    allowfullscreen=""
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="section">
-        <div class="info-grid">
-            <div class="info-content">
-                <div class="info-item">
-                    <div class="info-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                    </div>
-                    <div>
-                        <h3>お問い合わせ</h3>
-                        <p>03-1234-5678</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
+    <!-- フッター -->
     <footer class="footer">
         <div class="footer-content">
             <div class="social-links">
-                <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="social-link">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="social-icon"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                <a href="https://www.instagram.com/shizu_sagamihara/" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="social-link"
+                   aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" 
+                         width="24" 
+                         height="24" 
+                         viewBox="0 0 24 24" 
+                         fill="none" 
+                         stroke="currentColor" 
+                         stroke-width="2" 
+                         stroke-linecap="round" 
+                         stroke-linejoin="round" 
+                         class="social-icon"
+                         aria-hidden="true">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                    </svg>
                 </a>
             </div>
-            <p class="copyright">© 2024 Serenity Sauna. All rights reserved.</p>
+            <p class="copyright">© 2024 しずの湯. All rights reserved.</p>
         </div>
     </footer>
 
-    <script>
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navMenu = document.querySelector('.nav-menu');
-        const body = document.body;
-        const headerHeight = document.querySelector('.header').offsetHeight;
+    <!-- JavaScriptコード -->
+    <script defer>
+        // DOM要素の取得とイベントリスナーの設定を行う関数
+        function initializeNavigation() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const body = document.body;
+            const headerHeight = document.querySelector('.header').offsetHeight;
 
-        menuToggle.addEventListener('click', () => {
-            menuToggle.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            body.classList.toggle('menu-open');
-        });
-
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
+            // メニュートグル機能
+            menuToggle?.addEventListener('click', () => {
+                const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+                menuToggle.setAttribute('aria-expanded', !isExpanded);
+                navMenu?.setAttribute('aria-hidden', isExpanded);
                 
-                // メニューを閉じる
-                menuToggle.classList.remove('active');
-                navMenu.classList.remove('active');
-                body.classList.remove('menu-open');
-
-                // 遷移先の要素を取得
-                const targetId = link.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-
-                if (targetElement) {
-                    // スクロール位置を計算（ヘッダーの高さを考慮）
-                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-
-                    // スムーズスクロール
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
+                menuToggle.classList.toggle('active');
+                navMenu?.classList.toggle('active');
+                body.classList.toggle('menu-open');
             });
-        });
+
+            // スムーズスクロールナビゲーション
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // メニューを閉じる
+                    menuToggle?.classList.remove('active');
+                    navMenu?.classList.remove('active');
+                    body.classList.remove('menu-open');
+                    menuToggle?.setAttribute('aria-expanded', 'false');
+                    navMenu?.setAttribute('aria-hidden', 'true');
+
+                    // ターゲット要素の取得
+                    const targetId = link.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+
+                    if (targetElement) {
+                        // スクロール位置の計算（ヘッダーの高さを考慮）
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+
+                        // スムーズスクロールの実行
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        }
+
+        // DOMContentLoadedイベントで初期化
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeNavigation);
+        } else {
+            initializeNavigation();
+        }
     </script>
 </body>
 </html>

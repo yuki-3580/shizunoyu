@@ -1,13 +1,24 @@
-/* Reset and base styles */
-* {
+/* ==========================================================================
+   ベーススタイルとリセット
+   ========================================================================== */
+   * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Font imports */
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+/* フォントの読み込み - font-displayを追加 */
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap&font-display=swap');
 
+/* タイポグラフィ */
+.scroll-text,
+.copyright,
+.nav-link:not(:lang(ja)) {
+    font-family: "Lato", sans-serif;
+    font-weight: 300;
+}
+
+/* 基本スタイル */
 body {
     font-family: "游ゴシック体 Pr6N R", YuGothic, "Yu Gothic", "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     line-height: 1.6;
@@ -18,21 +29,18 @@ body {
     flex-direction: column;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-size-adjust: 100%;
 }
 
-/* Apply Lato font to specific elements */
-.scroll-text,
-.copyright,
-.nav-link:not(:lang(ja)) {
-    font-family: "Lato", sans-serif;
-    font-weight: 300;
-}
-
+/* メニュー開放時のスタイル */
 body.menu-open {
     overflow: hidden;
 }
 
-/* Header */
+/* ==========================================================================
+   ヘッダーとナビゲーション
+   ========================================================================== */
+/* ヘッダー */
 .header {
     position: fixed;
     top: 0;
@@ -56,12 +64,7 @@ body.menu-open {
     margin: 0 auto;
 }
 
-.header-logo {
-    height: 50px;
-    object-fit: contain;
-}
-
-/* Hamburger Menu */
+/* ハンバーガーメニュー */
 .menu-toggle {
     display: flex;
     flex-direction: column;
@@ -85,19 +88,14 @@ body.menu-open {
     left: 0;
 }
 
-.menu-line:nth-child(1) {
-    top: 0;
-}
-
-.menu-line:nth-child(2) {
+.menu-line:nth-child(1) { top: 0; }
+.menu-line:nth-child(2) { 
     top: 50%;
     transform: translateY(-50%);
 }
+.menu-line:nth-child(3) { bottom: 0; }
 
-.menu-line:nth-child(3) {
-    bottom: 0;
-}
-
+/* アクティブ状態のアニメーション */
 .menu-toggle.active .menu-line:nth-child(1) {
     transform: translateY(10px) rotate(45deg);
 }
@@ -110,7 +108,7 @@ body.menu-open {
     transform: translateY(-10px) rotate(-45deg);
 }
 
-/* Navigation Menu */
+/* ナビゲーションメニュー */
 .nav-menu {
     position: fixed;
     top: 0;
@@ -123,8 +121,8 @@ body.menu-open {
     z-index: 999;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center items horizontally */
-    text-align: center; /* Center text alignment */
+    align-items: center;
+    text-align: center;
 }
 
 .nav-menu.active {
@@ -135,7 +133,7 @@ body.menu-open {
     list-style: none;
     padding: 0;
     width: 100%;
-    max-width: 300px; /* Limit the width for better readability */
+    max-width: 300px;
 }
 
 .nav-list li {
@@ -173,7 +171,9 @@ body.menu-open {
     color: #4fb6a5;
 }
 
-/* Rest of the CSS remains the same */
+/* ==========================================================================
+   ヒーローセクション
+   ========================================================================== */
 .hero {
     position: relative;
     width: 100%;
@@ -190,6 +190,7 @@ body.menu-open {
     display: block;
 }
 
+/* スクロールインジケーター */
 .scroll-indicator {
     height: 80px;
     display: flex;
@@ -227,6 +228,9 @@ body.menu-open {
     animation: scrollLine 2s ease-in-out infinite;
 }
 
+/* ==========================================================================
+   コンテンツセクション
+   ========================================================================== */
 .section {
     padding: 2rem 1rem;
 }
@@ -241,6 +245,7 @@ body.menu-open {
     flex: 1;
 }
 
+/* 情報アイテム */
 .info-item {
     display: flex;
     align-items: flex-start;
@@ -275,12 +280,16 @@ body.menu-open {
     font-size: 0.95rem;
 }
 
+/* 地図コンテナ */
 .map-container {
     margin-top: 2rem;
     height: 400px;
     width: 100%;
 }
 
+/* ==========================================================================
+   フッター
+   ========================================================================== */
 .footer {
     background: #f9fafb;
     padding: 2rem 1rem;
@@ -324,17 +333,13 @@ body.menu-open {
     text-align: center;
 }
 
-/* Animations */
+/* ==========================================================================
+   アニメーション
+   ========================================================================== */
 @keyframes scrollLine {
-    0% {
-        transform: translateY(-100%);
-    }
-    50% {
-        transform: translateY(0);
-    }
-    100% {
-        transform: translateY(100%);
-    }
+    0% { transform: translateY(-100%); }
+    50% { transform: translateY(0); }
+    100% { transform: translateY(100%); }
 }
 
 @keyframes fadeInUp {
@@ -348,17 +353,18 @@ body.menu-open {
     }
 }
 
-/* Media Queries */
+/* ==========================================================================
+   メディアクエリ
+   ========================================================================== */
+/* デスクトップスタイル */
 @media (min-width: 768px) {
+    /* ヘッダー調整 */
     .header {
         height: 80px;
         padding: 0 2rem;
     }
 
-    .header-logo {
-        height: 60px;
-    }
-
+    /* レイアウト調整 */
     .hero {
         margin-top: 80px;
     }
@@ -371,6 +377,7 @@ body.menu-open {
         padding: 3rem;
     }
 
+    /* タイポグラフィ調整 */
     .info-item h3 {
         font-size: 1.2rem;
     }
@@ -379,10 +386,12 @@ body.menu-open {
         font-size: 1rem;
     }
 
+    /* ナビゲーション調整 */
     .nav-menu {
         width: 300px;
     }
 
+    /* グリッドレイアウト */
     .info-grid {
         display: grid;
         grid-template-columns: minmax(300px, 2fr) 3fr;
@@ -398,6 +407,7 @@ body.menu-open {
         padding: 2rem 0;
     }
 
+    /* 画像処理 */
     .exterior-image {
         height: 100%;
         position: relative;
@@ -413,6 +423,7 @@ body.menu-open {
         object-fit: cover;
     }
 
+    /* 地図調整 */
     .map-container {
         margin-top: 0;
         height: 100%;
@@ -423,6 +434,7 @@ body.menu-open {
         grid-template-columns: 1fr;
     }
 
+    /* フッター調整 */
     .footer {
         padding: 3rem 2rem;
     }
@@ -433,7 +445,7 @@ body.menu-open {
     }
 }
 
-/* Mobile-specific styles */
+/* モバイル特有のスタイル */
 @media (max-width: 767px) {
     .exterior-image {
         height: 300px;
