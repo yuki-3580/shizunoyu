@@ -9,18 +9,39 @@
 <body>
     <header class="header">
         <div class="header-content">
-            <img src="images/logo.png" alt="Shizunoyu Logo" class="header-logo">
+            <img src="/images/logo.png" alt="Serenity Sauna Logo" class="header-logo">
+            <button class="menu-toggle" aria-label="メニューを開く">
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+                <span class="menu-line"></span>
+            </button>
         </div>
     </header>
+
+    <nav class="nav-menu">
+        <ul class="nav-list">
+            <li><a href="#hours" class="nav-link">営業時間</a></li>
+            <li><a href="#price" class="nav-link">料金</a></li>
+            <li><a href="#access" class="nav-link">アクセス</a></li>
+            <li><a href="#contact" class="nav-link">お問い合わせ</a></li>
+        </ul>
+        <div class="nav-footer">
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="nav-social-link">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="social-icon"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            </a>
+        </div>
+    </nav>
+
     <div class="hero">
         <img src="images/top.png" alt="Luxurious Sauna Interior">
-        <div class="hero-overlay">
-            <h1 class="hero-title">SERENITY SAUNA</h1>
+        <div class="scroll-indicator">
+            <span class="scroll-text">Scroll</span>
+            <div class="scroll-line"></div>
         </div>
     </div>
 
     <!-- 施設情報 -->
-    <section class="section">
+    <section id="hours" class="section">
         <div class="info-grid">
             <div class="info-content">
                 <div class="info-item">
@@ -33,7 +54,7 @@
                     </div>
                 </div>
 
-                <div class="info-item">
+                <div id="price" class="info-item">
                     <div class="info-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12H7"/></svg>
                     </div>
@@ -46,8 +67,15 @@
         </div>
     </section>
 
-    <!-- アクセス -->
+    <!-- 外観 -->
     <section class="section">
+        <div class="exterior-image">
+            <img src="images/gaikan.jpg" alt="施設外観" class="facility-image">
+        </div>
+    </section>
+
+    <!-- アクセス -->
+    <section id="access" class="section">
         <div class="info-grid">
             <div class="info-content">
                 <div class="info-item">
@@ -74,7 +102,7 @@
         </div>
     </section>
 
-    <section class="section">
+    <section id="contact" class="section">
         <div class="info-grid">
             <div class="info-content">
                 <div class="info-item">
@@ -91,7 +119,53 @@
     </section>
 
     <footer class="footer">
-        <p>© 2024 Serenity Sauna. All rights reserved.</p>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" class="social-link">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="social-icon"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                </a>
+            </div>
+            <p class="copyright">© 2024 Serenity Sauna. All rights reserved.</p>
+        </div>
     </footer>
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navMenu = document.querySelector('.nav-menu');
+        const body = document.body;
+        const headerHeight = document.querySelector('.header').offsetHeight;
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+            body.classList.toggle('menu-open');
+        });
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // メニューを閉じる
+                menuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+                body.classList.remove('menu-open');
+
+                // 遷移先の要素を取得
+                const targetId = link.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    // スクロール位置を計算（ヘッダーの高さを考慮）
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+
+                    // スムーズスクロール
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
