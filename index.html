@@ -6,21 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="しずの湯 - Open to recovery 疲労の抜けない日常生活に、回復する習慣を">
     
+    <!-- プリロード -->
+    <link rel="preload" href="/css/style.css" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" as="style">
+    <link rel="preload" href="/images/logo.png" as="image" type="image/png">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
     <!-- タイトル -->
     <title>しずの湯</title>
     
     <!-- スタイルシート -->
     <link rel="stylesheet" href="/css/style.css">
+
+    <!-- インライン重要なスタイル -->
+    <style>
+        .header-logo {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+            max-width: none;
+        }
+        @media (min-width: 768px) {
+            .header-logo {
+                height: 60px;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- ヘッダー -->
     <header class="header">
         <div class="header-content">
             <img src="/images/logo.png" 
-                alt="しずの湯 ロゴ" 
-                class="header-logo"
-                width="50"
-                height="50">
+                 alt="しずの湯 ロゴ" 
+                 class="header-logo"
+                 width="50"
+                 height="50">
             <button class="menu-toggle" 
                     aria-label="メニューを開く"
                     aria-expanded="false"
@@ -41,22 +62,22 @@
             <li><a href="#contact" class="nav-link">お問い合わせ</a></li>
         </ul>
         <div class="nav-footer">
-            <a href="https://www.instagram.com/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                class="nav-social-link"
-                aria-label="Instagram">
+            <a href="https://www.instagram.com/shizu_sagamihara/" 
+               target="_blank" 
+               rel="noopener noreferrer" 
+               class="nav-social-link"
+               aria-label="Instagram">
                 <svg xmlns="http://www.w3.org/2000/svg" 
-                    width="32" 
-                    height="32" 
-                    viewBox="0 0 24 24" 
-                    fill="none" 
-                    stroke="currentColor" 
-                    stroke-width="2" 
-                    stroke-linecap="round" 
-                    stroke-linejoin="round" 
-                    class="social-icon"
-                    aria-hidden="true">
+                     width="32" 
+                     height="32" 
+                     viewBox="0 0 24 24" 
+                     fill="none" 
+                     stroke="currentColor" 
+                     stroke-width="2" 
+                     stroke-linecap="round" 
+                     stroke-linejoin="round" 
+                     class="social-icon"
+                     aria-hidden="true">
                     <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
@@ -65,13 +86,13 @@
         </div>
     </nav>
 
-    <!-- メインビジュアル -->
+    <!-- ヒーローセクション -->
     <div class="hero">
-        <img src="images/top.png" 
-            alt="サウナ内装" 
-            width="1920"
-            height="1080"
-            loading="eager">
+        <img src="/images/top.png" 
+             alt="サウナ内装" 
+             width="1920"
+             height="1080"
+             loading="eager">
         <div class="scroll-indicator">
             <span class="scroll-text">Scroll</span>
             <div class="scroll-line" aria-hidden="true"></div>
@@ -88,22 +109,22 @@
                     <div class="info-item">
                         <div class="info-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" 
-                                width="24" 
-                                height="24" 
-                                viewBox="0 0 24 24" 
-                                fill="none" 
-                                stroke="currentColor" 
-                                stroke-width="2" 
-                                stroke-linecap="round" 
-                                stroke-linejoin="round"
-                                aria-hidden="true">
+                                 width="24" 
+                                 height="24" 
+                                 viewBox="0 0 24 24" 
+                                 fill="none" 
+                                 stroke="currentColor" 
+                                 stroke-width="2" 
+                                 stroke-linecap="round" 
+                                 stroke-linejoin="round"
+                                 aria-hidden="true">
                                 <circle cx="12" cy="12" r="10"/>
                                 <polyline points="12 6 12 12 16 14"/>
                             </svg>
                         </div>
                         <div>
                             <h3>営業時間</h3>
-                            <p>平日: 13:00 - 23:30<br>土日祝: 9:00 - 23:30</p>
+                            <p>平日: 10:00 - 23:00<br>土日祝: 9:00 - 24:00</p>
                         </div>
                     </div>
 
@@ -111,15 +132,15 @@
                     <div id="price" class="info-item">
                         <div class="info-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" 
-                                width="24" 
-                                height="24" 
-                                viewBox="0 0 24 24" 
-                                fill="none" 
-                                stroke="currentColor" 
-                                stroke-width="2" 
-                                stroke-linecap="round" 
-                                stroke-linejoin="round"
-                                aria-hidden="true">
+                                 width="24" 
+                                 height="24" 
+                                 viewBox="0 0 24 24" 
+                                 fill="none" 
+                                 stroke="currentColor" 
+                                 stroke-width="2" 
+                                 stroke-linecap="round" 
+                                 stroke-linejoin="round"
+                                 aria-hidden="true">
                                 <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/>
                                 <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/>
                                 <path d="M18 12H7"/>
@@ -127,18 +148,17 @@
                         </div>
                         <div>
                             <h3>料金</h3>
-                            <p>1,480円（税込）</p>
-                            <p>2時間 ・ タオル付</p>
+                            <p>一律 1,150円</p>
                         </div>
                     </div>
                 </div>
                 <div class="exterior-image">
-                    <img src="images/gaikan.jpg" 
-                        alt="施設外観" 
-                        class="facility-image"
-                        width="800"
-                        height="600"
-                        loading="lazy">
+                    <img src="/images/gaikan.jpg" 
+                         alt="施設外観" 
+                         class="facility-image"
+                         width="800"
+                         height="600"
+                         loading="lazy">
                 </div>
             </div>
         </section>
@@ -150,15 +170,15 @@
                     <div class="info-item">
                         <div class="info-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" 
-                                width="24" 
-                                height="24" 
-                                viewBox="0 0 24 24" 
-                                fill="none" 
-                                stroke="currentColor" 
-                                stroke-width="2" 
-                                stroke-linecap="round" 
-                                stroke-linejoin="round"
-                                aria-hidden="true">
+                                 width="24" 
+                                 height="24" 
+                                 viewBox="0 0 24 24" 
+                                 fill="none" 
+                                 stroke="currentColor" 
+                                 stroke-width="2" 
+                                 stroke-linecap="round" 
+                                 stroke-linejoin="round"
+                                 aria-hidden="true">
                                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
                                 <circle cx="12" cy="10" r="3"/>
                             </svg>
@@ -190,15 +210,15 @@
                     <div class="info-item">
                         <div class="info-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" 
-                                width="24" 
-                                height="24" 
-                                viewBox="0 0 24 24" 
-                                fill="none" 
-                                stroke="currentColor" 
-                                stroke-width="2" 
-                                stroke-linecap="round" 
-                                stroke-linejoin="round"
-                                aria-hidden="true">
+                                 width="24" 
+                                 height="24" 
+                                 viewBox="0 0 24 24" 
+                                 fill="none" 
+                                 stroke="currentColor" 
+                                 stroke-width="2" 
+                                 stroke-linecap="round" 
+                                 stroke-linejoin="round"
+                                 aria-hidden="true">
                                 <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
                             </svg>
                         </div>
@@ -216,22 +236,22 @@
     <footer class="footer">
         <div class="footer-content">
             <div class="social-links">
-                <a href="https://www.instagram.com/" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    class="social-link"
-                    aria-label="Instagram">
+                <a href="https://www.instagram.com/shizu_sagamihara/" 
+                   target="_blank" 
+                   rel="noopener noreferrer" 
+                   class="social-link"
+                   aria-label="Instagram">
                     <svg xmlns="http://www.w3.org/2000/svg" 
-                            width="24" 
-                            height="24" 
-                            viewBox="0 0 24 24" 
-                            fill="none" 
-                            stroke="currentColor" 
-                            stroke-width="2" 
-                            stroke-linecap="round" 
-                            stroke-linejoin="round" 
-                            class="social-icon"
-                            aria-hidden="true">
+                         width="24" 
+                         height="24" 
+                         viewBox="0 0 24 24" 
+                         fill="none" 
+                         stroke="currentColor" 
+                         stroke-width="2" 
+                         stroke-linecap="round" 
+                         stroke-linejoin="round" 
+                         class="social-icon"
+                         aria-hidden="true">
                         <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                         <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                         <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
@@ -243,52 +263,61 @@
     </footer>
 
     <!-- JavaScriptコード -->
-    <script>
-        // DOM要素の取得
-        const menuToggle = document.querySelector('.menu-toggle');
-        const navMenu = document.querySelector('.nav-menu');
-        const body = document.body;
-        const headerHeight = document.querySelector('.header').offsetHeight;
+    <script defer>
+        // DOM要素の取得とイベントリスナーの設定を行う関数
+        function initializeNavigation() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            const body = document.body;
+            const headerHeight = document.querySelector('.header').offsetHeight;
 
-        // メニュートグル機能
-        menuToggle.addEventListener('click', () => {
-            const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-            menuToggle.setAttribute('aria-expanded', !isExpanded);
-            navMenu.setAttribute('aria-hidden', isExpanded);
-            
-            menuToggle.classList.toggle('active');
-            navMenu.classList.toggle('active');
-            body.classList.toggle('menu-open');
-        });
-
-        // スムーズスクロールナビゲーション
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
+            // メニュートグル機能
+            menuToggle?.addEventListener('click', () => {
+                const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+                menuToggle.setAttribute('aria-expanded', !isExpanded);
+                navMenu?.setAttribute('aria-hidden', isExpanded);
                 
-                // メニューを閉じる
-                menuToggle.classList.remove('active');
-                navMenu.classList.remove('active');
-                body.classList.remove('menu-open');
-                menuToggle.setAttribute('aria-expanded', 'false');
-                navMenu.setAttribute('aria-hidden', 'true');
-
-                // ターゲット要素の取得
-                const targetId = link.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-
-                if (targetElement) {
-                    // スクロール位置の計算（ヘッダーの高さを考慮）
-                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-
-                    // スムーズスクロールの実行
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                }
+                menuToggle.classList.toggle('active');
+                navMenu?.classList.toggle('active');
+                body.classList.toggle('menu-open');
             });
-        });
+
+            // スムーズスクロールナビゲーション
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // メニューを閉じる
+                    menuToggle?.classList.remove('active');
+                    navMenu?.classList.remove('active');
+                    body.classList.remove('menu-open');
+                    menuToggle?.setAttribute('aria-expanded', 'false');
+                    navMenu?.setAttribute('aria-hidden', 'true');
+
+                    // ターゲット要素の取得
+                    const targetId = link.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+
+                    if (targetElement) {
+                        // スクロール位置の計算（ヘッダーの高さを考慮）
+                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+
+                        // スムーズスクロールの実行
+                        window.scrollTo({
+                            top: targetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        }
+
+        // DOMContentLoadedイベントで初期化
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeNavigation);
+        } else {
+            initializeNavigation();
+        }
     </script>
 </body>
 </html>
