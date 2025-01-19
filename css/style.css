@@ -460,7 +460,7 @@ body.menu-open {
     padding: 2rem;
     border-radius: 8px;
     overflow: hidden;
-    max-height: 400px; /* 高さを制限 */
+    max-height: 450px; /* 高さを制限 */
     display: flex;
     flex-direction: column; /* コンテンツを縦方向に整列 */
 }
@@ -524,6 +524,6 @@ body.menu-open {
     /* 右側の投稿コンテンツ */
     #latest-tweet .tweet-content {
         padding: 1rem 1.5rem; /* 左右の余白を統一 */
-        max-height: 300px; /* 高さを制限 */
+        max-height: 350px; /* 高さを制限 */
     }
 }
