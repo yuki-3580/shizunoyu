@@ -455,33 +455,75 @@ body.menu-open {
     }
 }
 
-/* ツイート埋め込みセクション */
-#latest-tweet {
-    padding: 20px;
-    text-align: center;
-}
-
-#latest-tweet h2 {
-    font-size: 1.5rem;
-    margin-bottom: 20px;
-}
-
-.tweet-container {
+/* 最新ツイートセクションのスタイル */
+#latest-tweet .tweet-content {
+    padding: 2rem;
+    border-radius: 8px;
+    overflow: hidden;
+    max-height: 400px; /* 高さを制限 */
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    flex-direction: column; /* コンテンツを縦方向に整列 */
 }
 
-#tweets-container {
-    max-width: 500px;
-    width: 100%;
+#latest-tweet .info-grid {
+    display: grid;
+    grid-template-columns: minmax(300px, 2fr) 3fr; /* 左に文字、右に投稿コンテンツ */
+    gap: 2rem;
+    align-items: center;
+    max-width: 1200px;
     margin: 0 auto;
+}
+
+#latest-tweet .tweet-content {
+    padding: 2rem;
     overflow: hidden;
 }
 
+#tweets-container {
+    flex: 1; /* 残りのスペースを埋める */
+    overflow-y: auto; /* 高さを超えた場合スクロール */
+    height: 100%; /* 子要素が親要素に収まる */
+}
+
 @media (max-width: 768px) {
-    #latest-tweet h2 {
-        font-size: 1.2rem;
+    /* 最新ツイートセクションのグリッド設定 */
+    #latest-tweet .info-grid {
+        grid-template-columns: 1fr; /* モバイルでは縦に並べる */
+        gap: 0.5rem; /* コンテンツ間の余白を統一 */
+    }
+
+    /* 左側の情報コンテンツ（お知らせの配置調整） */
+    #latest-tweet .info-content {
+        padding: 1rem 1.5rem; /* 営業時間と同じ余白 */
+        text-align: left; /* テキストを左揃え */
+        display: flex; /* フレックスで整列 */
+        flex-direction: column;
+        justify-content: flex-start; /* 上部揃え */
+    }
+
+    #latest-tweet .info-item {
+        padding: 0; /* 不要な余白を削除 */
+        margin: 0; /* 外側の余白を削除 */
+    }
+
+    /* タイトルのスタイル */
+    #latest-tweet .info-item h3 {
+        font-size: 1.2rem; /* タイトルサイズを統一 */
+        margin-bottom: 0.5rem; /* 営業時間と同じ間隔 */
+        color: #272727;
+    }
+
+    /* 説明文のスタイル */
+    #latest-tweet .info-item p {
+        font-size: 1rem; /* テキストのサイズを統一 */
+        line-height: 1.6; /* 読みやすい行間 */
+        color: #272727;
+        margin: 0; /* 余計な余白を削除 */
+    }
+
+    /* 右側の投稿コンテンツ */
+    #latest-tweet .tweet-content {
+        padding: 1rem 1.5rem; /* 左右の余白を統一 */
+        max-height: 300px; /* 高さを制限 */
     }
 }
