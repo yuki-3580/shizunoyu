@@ -99,6 +99,15 @@
         </div>
     </div>
 
+    <!-- 最新ツイートセクション -->
+    <section id="latest-tweet" class="section">
+        <div class="tweet-container">
+            <h3>お知らせ</h3>
+            <div id="tweets-container">
+            </div>
+        </div>
+    </section>
+
     <!-- メインコンテンツ -->
     <main>
         <!-- 営業時間・料金セクション -->
@@ -201,63 +210,8 @@
             <p class="copyright">© 2025 しずの湯. All rights reserved.</p>
         </div>
     </footer>
-
-    <!-- JavaScriptコード -->
-    <script defer>
-        // DOM要素の取得とイベントリスナーの設定を行う関数
-        function initializeNavigation() {
-            const menuToggle = document.querySelector('.menu-toggle');
-            const navMenu = document.querySelector('.nav-menu');
-            const body = document.body;
-            const headerHeight = document.querySelector('.header').offsetHeight;
-
-            // メニュートグル機能
-            menuToggle?.addEventListener('click', () => {
-                const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-                menuToggle.setAttribute('aria-expanded', !isExpanded);
-                navMenu?.setAttribute('aria-hidden', isExpanded);
-                
-                menuToggle.classList.toggle('active');
-                navMenu?.classList.toggle('active');
-                body.classList.toggle('menu-open');
-            });
-
-            // スムーズスクロールナビゲーション
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    
-                    // メニューを閉じる
-                    menuToggle?.classList.remove('active');
-                    navMenu?.classList.remove('active');
-                    body.classList.remove('menu-open');
-                    menuToggle?.setAttribute('aria-expanded', 'false');
-                    navMenu?.setAttribute('aria-hidden', 'true');
-
-                    // ターゲット要素の取得
-                    const targetId = link.getAttribute('href');
-                    const targetElement = document.querySelector(targetId);
-
-                    if (targetElement) {
-                        // スクロール位置の計算（ヘッダーの高さを考慮）
-                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-
-                        // スムーズスクロールの実行
-                        window.scrollTo({
-                            top: targetPosition,
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-        }
-
-        // DOMContentLoadedイベントで初期化
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initializeNavigation);
-        } else {
-            initializeNavigation();
-        }
-    </script>
+    <!-- 外部スクリプト -->
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <script defer src="/js/scripts.js"></script>
 </body>
 </html>
