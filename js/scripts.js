@@ -70,7 +70,7 @@ function initializeNavigation() {
 
 // Google Sheetsから最新ツイートリンクを取得
 async function fetchLatestTweetLink() {
-    const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQUjoRWjFzoD3Dcs9OaJeF7Uv6TzL5D5EVe4tgcQtEQLpXYts1Bcl5qy9eHenztzb-IVQJdF0cYD7cl/pub?output=csv'; // Google Sheetsの公開CSVリンク
+    const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTyA1uM65I2cNrjT0SIoPoamWj4RJAYCN4uVIU7HP0I2726owYCfjJHEc_7iiitgxwAM9lPWyghXPB6/pub?gid=0&single=true&output=csv'; // Google Sheetsの公開CSVリンク
 
     try {
         console.log('Fetching CSV from:', csvUrl);
