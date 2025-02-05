@@ -399,12 +399,6 @@ body.menu-open {
         padding: 2rem 0;
     }
 
-    .exterior-image {
-        height: 100%;
-        position: relative;
-        min-height: 400px;
-    }
-
     .facility-image {
         position: absolute;
         top: 0;

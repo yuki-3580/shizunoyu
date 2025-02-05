@@ -50,7 +50,7 @@ function initializeNavigation() {
         body.classList.toggle('menu-open');
     });
 
-    // スムーズスクロール処理
+    // **メニュー項目をクリックしたらメニューを閉じる**
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
@@ -64,6 +64,13 @@ function initializeNavigation() {
                     behavior: 'smooth'
                 });
             }
+
+            // **ここでメニューを閉じる処理を追加**
+            menuToggle?.setAttribute('aria-expanded', false);
+            navMenu?.setAttribute('aria-hidden', true);
+            menuToggle?.classList.remove('active');
+            navMenu?.classList.remove('active');
+            body.classList.remove('menu-open');
         });
     });
 }
