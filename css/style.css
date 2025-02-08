@@ -238,57 +238,43 @@ body {
     display: block;
 }
 
-/* スクロール誘導のデザイン */
-.scroll-indicator {
-    height: 80px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    background-color: #F0EEEF;
-    animation: fadeInUp 1s ease-out forwards;
-}
-
-.scroll-text {
-    font-size: 14px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: #272727;
-}
-
-.scroll-line {
-    width: 1px;
-    height: 40px;
-    background-color: #272727;
+/* スクロールダウンの位置 */
+.scroll {
+    padding-top: 60px;
     position: relative;
-    overflow: hidden;
-}
-
-/* スクロールラインのアニメーション */
-.scroll-line::after {
-    content: '';
-    position: absolute;
-    top: 0;
+    text-align: center;
+  }
+  /* 矢印のアニメーション部分 */
+  .scroll::before {
+    animation: scroll 2s infinite;
+    border-bottom: 1px solid #000;
+    border-left: 1px solid #000;
+    content: "";
+    height: 20px;
     left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #272727;
-    animation: scrollLine 2s ease-in-out infinite;
-}
-
-/* スクロールラインのアニメーション効果 */
-@keyframes scrollLine {
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 20px;
+  }
+  /* 矢印のアニメーション */
+  @keyframes scroll {
     0% {
-        transform: translateY(-100%);
+      opacity: 0;
+      transform: rotate(-45deg) translate(0, 0);
     }
-    50% {
-        transform: translateY(0);
+    40% {
+      opacity: 1;
+    }
+    80% {
+      opacity: 0;
+      transform: rotate(-45deg) translate(-20px, 20px);
     }
     100% {
-        transform: translateY(100%);
+      opacity: 0;
     }
-}
+  }
 
 /* フェードインアニメーション */
 @keyframes fadeInUp {
