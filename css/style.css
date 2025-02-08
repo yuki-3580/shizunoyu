@@ -20,19 +20,128 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* Apply Lato font to specific elements */
-.scroll-text,
-.copyright,
-.nav-link:not(:lang(ja)) {
-    font-family: "Lato", sans-serif;
-    font-weight: 300;
+/* ナビゲーションメニュー */
+.nav-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh;
+    background-color: #ffffff;
+    padding: 100px 2rem;
+    transition: right 0.3s ease;
+    z-index: 1100;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 
-body.menu-open {
-    overflow: hidden;
+/* メニュー内のInstagramアイコン */
+.nav-footer {
+    margin-top: auto; /* メニューの一番下に配置 */
+    padding-top: 2rem;
+    display: flex;
+    justify-content: center;
 }
 
-/* Header */
+.nav-social-link {
+    color: #272727;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-social-link:hover {
+    color: #4fb6a5;
+}
+
+/* Instagramアイコンのサイズ */
+.nav-social-link svg {
+    width: 36px;
+    height: 36px;
+}
+
+/* メニューが開いたとき */
+.nav-menu.active {
+    right: 0;
+}
+
+.nav-menu.active ~ #tweets-container {
+    pointer-events: none;
+}
+
+/* PC向けの調整 */
+@media (min-width: 1024px) {
+    .nav-menu {
+        width: 300px; /* 必要最低限の幅に */
+        height: auto; /* 必要な分だけ高さを確保 */
+        top: 70px; /* ヘッダーの下に配置 */
+        right: -320px; /* 初期状態では見えない */
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-menu.active {
+        right: 10px; /* 画面右端から少し余裕を持たせる */
+    }
+
+    .nav-footer {
+        padding-top: 1.5rem; /* PCでも適度な余白 */
+    }
+
+    .nav-social-link svg {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+.nav-list {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    max-width: 300px;
+}
+
+.nav-list li {
+    margin-bottom: 1.5rem;
+}
+
+.nav-link {
+    display: block;
+    font-size: 1.5rem;
+    color: #272727;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #4fb6a5;
+}
+
+/* ナビゲーションのフッター */
+.nav-footer {
+    margin-top: auto;
+    padding-top: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-social-link {
+    color: #272727;
+    transition: color 0.3s ease;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-social-link:hover {
+    color: #4fb6a5;
+}
+
+/* ヘッダー */
 .header {
     position: fixed;
     top: 0;
@@ -62,7 +171,7 @@ body.menu-open {
     object-fit: contain;
 }
 
-/* Hamburger Menu */
+/* ハンバーガーメニュー */
 .menu-toggle {
     display: flex;
     flex-direction: column;
@@ -99,6 +208,7 @@ body.menu-open {
     bottom: 0;
 }
 
+/* ハンバーガーメニューの開閉アニメーション */
 .menu-toggle.active .menu-line:nth-child(1) {
     transform: translateY(10px) rotate(45deg);
 }
@@ -111,70 +221,7 @@ body.menu-open {
     transform: translateY(-10px) rotate(-45deg);
 }
 
-/* Navigation Menu */
-.nav-menu {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 100%;
-    height: 100vh;
-    background-color: #ffffff;
-    padding: 100px 2rem;
-    transition: right 0.3s ease;
-    z-index: 999;
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Center items horizontally */
-    text-align: center; /* Center text alignment */
-}
-
-.nav-menu.active {
-    right: 0;
-}
-
-.nav-list {
-    list-style: none;
-    padding: 0;
-    width: 100%;
-    max-width: 300px; /* Limit the width for better readability */
-}
-
-.nav-list li {
-    margin-bottom: 2rem;
-}
-
-.nav-link {
-    display: block;
-    font-size: 1.5rem;
-    color: #272727;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.nav-link:hover {
-    color: #4fb6a5;
-}
-
-.nav-footer {
-    margin-top: auto;
-    padding-top: 2rem;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-.nav-social-link {
-    color: #272727;
-    transition: color 0.3s ease;
-    display: flex;
-    justify-content: center;
-}
-
-.nav-social-link:hover {
-    color: #4fb6a5;
-}
-
-/* Rest of the CSS remains the same */
+/* ヒーローセクション */
 .hero {
     position: relative;
     width: 100%;
@@ -191,6 +238,7 @@ body.menu-open {
     display: block;
 }
 
+/* スクロール誘導のデザイン */
 .scroll-indicator {
     height: 80px;
     display: flex;
@@ -217,6 +265,7 @@ body.menu-open {
     overflow: hidden;
 }
 
+/* スクロールラインのアニメーション */
 .scroll-line::after {
     content: '';
     position: absolute;
@@ -228,104 +277,7 @@ body.menu-open {
     animation: scrollLine 2s ease-in-out infinite;
 }
 
-.section {
-    padding: 2rem 1rem;
-}
-
-.info-grid {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.info-content {
-    padding: 2rem;
-    flex: 1;
-}
-
-.info-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 1rem;
-    padding: 1rem 0;
-}
-
-.info-item:first-child {
-    padding-top: 0;
-}
-
-.info-item:last-child {
-    padding-bottom: 0;
-}
-
-.info-icon {
-    width: 24px;
-    height: 24px;
-    flex-shrink: 0;
-    color: #4fb6a5;
-}
-
-.info-item h3 {
-    font-size: 1.1rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-    color: #272727;
-}
-
-.info-item p {
-    color: #272727;
-    font-size: 0.95rem;
-}
-
-.map-container {
-    margin-top: 2rem;
-    height: 400px;
-    width: 100%;
-}
-
-.footer {
-    background: #f9fafb;
-    padding: 2rem 1rem;
-    margin-top: auto;
-}
-
-.footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
-}
-
-.social-links {
-    display: flex;
-    justify-content: center;
-}
-
-.social-link {
-    color: #272727;
-    transition: color 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.social-link:hover {
-    color: #4fb6a5;
-}
-
-.social-icon {
-    width: 32px;
-    height: 32px;
-}
-
-.copyright {
-    color: #272727;
-    font-size: 0.9rem;
-    text-align: center;
-}
-
-/* Animations */
+/* スクロールラインのアニメーション効果 */
 @keyframes scrollLine {
     0% {
         transform: translateY(-100%);
@@ -338,6 +290,7 @@ body.menu-open {
     }
 }
 
+/* フェードインアニメーション */
 @keyframes fadeInUp {
     from {
         opacity: 0;
@@ -349,75 +302,166 @@ body.menu-open {
     }
 }
 
-/* Media Queries */
-@media (min-width: 768px) {
-    .header {
-        height: 80px;
-        padding: 0 2rem;
-    }
+/* メインコンテンツ */
+main {
+    padding: 2rem 1rem;
+}
 
-    .header-logo {
-        height: 60px;
-    }
+/* 各セクションのデザイン */
+.section {
+    padding: 1rem 1rem;
+}
 
-    .hero {
-        margin-top: 80px;
-    }
+/* 情報のグリッド配置 */
+.info-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    gap: 1.5rem;
+}
 
-    .section {
-        padding: 3rem 2rem;
-    }
+/* 情報コンテンツの共通デザイン */
+.info-item {
+    padding: 1rem;
+}
 
-    .info-content {
-        padding: 3rem;
-    }
+/* セクションタイトル */
+.info-item h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #272727;
+    margin-bottom: 0.5rem;
+}
 
-    .info-item h3 {
-        font-size: 1.2rem;
-    }
+/* テキストのスタイル */
+.info-item p {
+    font-size: 1rem;
+    color: #272727;
+    line-height: 1.6;
+}
 
-    .info-item p {
-        font-size: 1rem;
-    }
+/* アクセス情報のマップスタイル */
+.map-container {
+    margin-top: 2rem;
+    height: 300px;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+}
 
-    .nav-menu {
-        width: 300px;
-    }
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
 
-    .info-grid {
-        display: grid;
-        grid-template-columns: minmax(300px, 2fr) 3fr;
+/* お知らせセクションのレイアウト */
+#latest-tweet .info-grid {
+    display: grid;
+    grid-template-columns: minmax(250px, 1fr) minmax(300px, 2fr); /* 左：テキスト / 右：ツイート */
+    gap: 1.5rem;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* ツイートコンテンツ */
+.tweet-content {
+    padding: 1.5rem;
+    overflow: hidden;
+    max-height: 450px;
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* 幅を100%に */
+}
+
+/* ツイート埋め込みエリアの調整 */
+#tweets-container {
+    flex: 1;
+    overflow-y: auto;
+    height: 100%;
+    max-width: 100%; /* 親要素の幅を超えないように */
+}
+
+/* PC向けの幅調整 */
+@media (min-width: 1024px) {
+    #latest-tweet .info-grid {
+        grid-template-columns: minmax(300px, 1.2fr) minmax(400px, 2fr); /* PCではツイートエリアを広げる */
         gap: 2rem;
-        align-items: stretch;
+        max-width: 1200px;
     }
 
-    .info-content {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 2rem 0;
+    .tweet-content {
+        padding: 2rem;
+        max-width: 600px; /* ツイートエリアの最大幅を制限 */
+    }
+}
+
+/* スマホ向けのレイアウト */
+@media (max-width: 768px) {
+    #latest-tweet .info-grid {
+        grid-template-columns: 1fr; /* モバイルでは縦並び */
     }
 
-    .facility-image {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+    .tweet-content {
+        max-height: 350px;
+        padding: 1rem;
     }
+}
 
-    .map-container {
-        margin-top: 0;
-        height: 100%;
-        min-height: 400px;
-    }
+/* フッター */
+.footer {
+    background: #f9fafb;
+    padding: 2rem 1rem;
+    margin-top: auto;
+    text-align: center;
+}
 
-    #contact .info-grid {
-        grid-template-columns: 1fr;
-    }
+/* フッターのコンテンツ配置 */
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
 
+/* SNSアイコンのリンク */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+/* SNSリンクのデザイン */
+.social-link {
+    color: #272727;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-link:hover {
+    color: #4fb6a5;
+}
+
+/* SNSアイコン */
+.social-icon {
+    width: 32px;
+    height: 32px;
+}
+
+/* 著作権表示 */
+.copyright {
+    color: #272727;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* PC向けの調整 */
+@media (min-width: 768px) {
     .footer {
         padding: 3rem 2rem;
     }
@@ -425,99 +469,5 @@ body.menu-open {
     .social-icon {
         width: 40px;
         height: 40px;
-    }
-}
-
-/* Mobile-specific styles */
-@media (max-width: 767px) {
-    .exterior-image {
-        height: 300px;
-        position: relative;
-    }
-
-    .facility-image {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .menu-toggle {
-        display: flex;
-    }
-}
-
-/* 最新ツイートセクションのスタイル */
-#latest-tweet .tweet-content {
-    padding: 2rem;
-    border-radius: 8px;
-    overflow: hidden;
-    max-height: 450px; /* 高さを制限 */
-    display: flex;
-    flex-direction: column; /* コンテンツを縦方向に整列 */
-}
-
-#latest-tweet .info-grid {
-    display: grid;
-    grid-template-columns: minmax(300px, 2fr) 3fr; /* 左に文字、右に投稿コンテンツ */
-    gap: 2rem;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-#latest-tweet .tweet-content {
-    padding: 2rem;
-    overflow: hidden;
-}
-
-#tweets-container {
-    flex: 1; /* 残りのスペースを埋める */
-    overflow-y: auto; /* 高さを超えた場合スクロール */
-    height: 100%; /* 子要素が親要素に収まる */
-}
-
-@media (max-width: 768px) {
-    /* 最新ツイートセクションのグリッド設定 */
-    #latest-tweet .info-grid {
-        grid-template-columns: 1fr; /* モバイルでは縦に並べる */
-        gap: 0.5rem; /* コンテンツ間の余白を統一 */
-    }
-
-    /* 左側の情報コンテンツ（お知らせの配置調整） */
-    #latest-tweet .info-content {
-        padding: 1rem 1.5rem; /* 営業時間と同じ余白 */
-        text-align: left; /* テキストを左揃え */
-        display: flex; /* フレックスで整列 */
-        flex-direction: column;
-        justify-content: flex-start; /* 上部揃え */
-    }
-
-    #latest-tweet .info-item {
-        padding: 0; /* 不要な余白を削除 */
-        margin: 0; /* 外側の余白を削除 */
-    }
-
-    /* タイトルのスタイル */
-    #latest-tweet .info-item h3 {
-        font-size: 1.2rem; /* タイトルサイズを統一 */
-        margin-bottom: 0.5rem; /* 営業時間と同じ間隔 */
-        color: #272727;
-    }
-
-    /* 説明文のスタイル */
-    #latest-tweet .info-item p {
-        font-size: 1rem; /* テキストのサイズを統一 */
-        line-height: 1.6; /* 読みやすい行間 */
-        color: #272727;
-        margin: 0; /* 余計な余白を削除 */
-    }
-
-    /* 右側の投稿コンテンツ */
-    #latest-tweet .tweet-content {
-        padding: 1rem 1.5rem; /* 左右の余白を統一 */
-        max-height: 350px; /* 高さを制限 */
     }
 }
