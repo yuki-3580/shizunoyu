@@ -1,4 +1,4 @@
-// 改行やダブルクオートを考慮したCSVパーサー
+// **改行やダブルクオートを考慮した CSV パーサー**
 function parseCSV(csvText) {
     const rows = [];
     let currentRow = [];
@@ -10,56 +10,103 @@ function parseCSV(csvText) {
         const nextChar = csvText[i + 1];
 
         if (char === '"') {
-            inQuotes = !inQuotes; // ダブルクオートの開始・終了を切り替え
+            if (inQuotes && nextChar === '"') {
+                currentCell += '"'; // エスケープされたダブルクオート
+                i++;
+            } else {
+                inQuotes = !inQuotes;
+            }
         } else if (char === ',' && !inQuotes) {
             currentRow.push(currentCell.trim());
             currentCell = '';
-        } else if (char === '\n' && !inQuotes) {
-            currentRow.push(currentCell.trim());
-            rows.push(currentRow);
-            currentRow = [];
-            currentCell = '';
+        } else if ((char === '\n' || char === '\r') && !inQuotes) {
+            if (currentCell || currentRow.length) {
+                currentRow.push(currentCell.trim());
+                rows.push(currentRow);
+                currentRow = [];
+                currentCell = '';
+            }
         } else {
             currentCell += char;
         }
+    }
 
-        if (i === csvText.length - 1) {
-            currentRow.push(currentCell.trim());
-            rows.push(currentRow);
-        }
+    if (currentCell || currentRow.length) {
+        currentRow.push(currentCell.trim());
+        rows.push(currentRow);
     }
 
     return rows;
 }
 
-// **ナビゲーション初期化**
+// **最新ツイートのリンクを Google Sheets から取得**
+async function fetchLatestTweetLink() {
+    const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTyA1uM65I2cNrjT0SIoPoamWj4RJAYCN4uVIU7HP0I2726owYCfjJHEc_7iiitgxwAM9lPWyghXPB6/pub?gid=0&single=true&output=csv';
+
+    try {
+        const response = await fetch(csvUrl);
+        if (!response.ok) throw new Error(`HTTPエラー: ${response.status} - ${response.statusText}`);
+
+        const csvText = await response.text();
+        const rows = parseCSV(csvText);
+
+        if (rows.length <= 1) throw new Error('CSVのデータが見つかりません');
+
+        const latestTweetLink = rows.at(-1)?.[3]?.trim();
+        if (!latestTweetLink) throw new Error('ツイートリンクの取得に失敗しました');
+
+        return latestTweetLink;
+    } catch (error) {
+        console.error('ツイート取得エラー:', error);
+        return null;
+    }
+}
+
+// **ツイートリンクからツイート ID を抽出**
+function extractTweetId(tweetLink) {
+    return tweetLink.match(/status\/(\d+)/)?.[1] || null;
+}
+
+// **最新ツイートを埋め込む**
+async function displayEmbeddedTweet() {
+    const tweetContainer = document.getElementById('tweets-container');
+    const latestTweetLink = await fetchLatestTweetLink();
+
+    if (!latestTweetLink) {
+        tweetContainer.textContent = 'ツイートを取得できませんでした。';
+        return;
+    }
+
+    const tweetId = extractTweetId(latestTweetLink);
+    if (!tweetId) {
+        tweetContainer.textContent = 'ツイートIDの取得に失敗しました。';
+        return;
+    }
+
+    const tweetDiv = document.createElement('div');
+    tweetContainer.appendChild(tweetDiv);
+
+    twttr.widgets.createTweet(tweetId, tweetDiv).catch(() => {
+        tweetContainer.textContent = 'ツイートの埋め込みに失敗しました。';
+    });
+}
+
+// **ナビゲーションの初期化**
 function initializeNavigation() {
     const menuToggle = document.querySelector('.menu-toggle');
-    const closeButton = document.querySelector('.close-button'); // メニュー内の閉じるボタン
+    const closeButton = document.querySelector('.close-button');
     const navMenu = document.querySelector('.nav-menu');
-    const body = document.body;
     const headerHeight = document.querySelector('.header').offsetHeight;
 
-    // **メニュー開閉のトグル関数**
     function toggleMenu() {
         const isActive = navMenu.classList.contains('active');
         menuToggle.setAttribute('aria-expanded', !isActive);
-        navMenu.setAttribute('aria-hidden', isActive);
-
-        menuToggle.classList.toggle('active');
         navMenu.classList.toggle('active');
-        body.classList.toggle('menu-open');
     }
 
-    // **メニューを開閉する処理**
-    menuToggle?.addEventListener('click', (event) => {
-        event.stopPropagation(); // 親要素への伝播を防ぐ
-        toggleMenu();
-    });
+    menuToggle?.addEventListener('click', toggleMenu);
+    closeButton?.addEventListener('click', toggleMenu);
 
-    closeButton?.addEventListener('click', toggleMenu); // メニュー内の閉じるボタンの動作
-
-    // **メニュー内リンクをクリックしたら閉じる**
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
@@ -67,19 +114,15 @@ function initializeNavigation() {
             const targetElement = document.querySelector(targetId);
 
             if (targetElement) {
-                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
                 window.scrollTo({
-                    top: targetPosition,
+                    top: targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight,
                     behavior: 'smooth'
                 });
             }
-
-            // **メニューを閉じる**
             toggleMenu();
         });
     });
 
-    // **メニュー外をクリックしたら閉じる**
     document.addEventListener('click', (event) => {
         if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
             if (navMenu.classList.contains('active')) {
@@ -89,104 +132,25 @@ function initializeNavigation() {
     });
 }
 
-// Google Sheetsから最新ツイートリンクを取得
-async function fetchLatestTweetLink() {
-    const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTyA1uM65I2cNrjT0SIoPoamWj4RJAYCN4uVIU7HP0I2726owYCfjJHEc_7iiitgxwAM9lPWyghXPB6/pub?gid=0&single=true&output=csv'; // Google Sheetsの公開CSVリンク
-
-    try {
-        console.log('Fetching CSV from:', csvUrl);
-
-        // CSVデータを取得
-        const response = await fetch(csvUrl);
-        if (!response.ok) {
-            throw new Error(`Failed to fetch CSV: ${response.status} ${response.statusText}`);
-        }
-
-        // CSVをパース
-        const csvText = await response.text();
-        console.log('Raw CSV data:', csvText);
-
-        const rows = parseCSV(csvText); // 改良版パーサーを使用
-        console.log('Parsed rows:', rows);
-
-        if (rows.length <= 1) {
-            throw new Error('No data found in CSV');
-        }
-
-        // 最後の行の4列目（ツイートリンク列）を取得
-        const latestRow = rows[rows.length - 1];
-        const latestTweetLink = latestRow[3]?.trim();
-
-        if (!latestTweetLink) {
-            throw new Error('Invalid data in the 4th column or column is empty');
-        }
-
-        console.log('Latest tweet link:', latestTweetLink);
-        return latestTweetLink;
-    } catch (error) {
-        console.error('Error fetching or processing CSV:', error);
-        return null;
-    }
-}
-
-// ツイートリンクからツイートIDを抽出
-function extractTweetId(tweetLink) {
-    const match = tweetLink.match(/status\/(\d+)/);
-    return match ? match[1] : null;
-}
-
-// ツイート埋め込みを表示
-async function displayEmbeddedTweet() {
-    const tweetContainer = document.getElementById('tweets-container');
-
-    // 最新ツイートリンクを取得
-    const latestTweetLink = await fetchLatestTweetLink();
-    if (!latestTweetLink) {
-        tweetContainer.textContent = 'ツイートの取得に失敗しました。';
-        return;
-    }
-
-    // ツイートIDを抽出
-    const tweetId = extractTweetId(latestTweetLink);
-    if (!tweetId) {
-        tweetContainer.textContent = 'ツイートIDを取得できませんでした。';
-        return;
-    }
-
-    // 埋め込みツイートを表示
-    const tweetDiv = document.createElement('div');
-    tweetContainer.appendChild(tweetDiv);
-
-    twttr.widgets.createTweet(tweetId, tweetDiv, {
-        theme: 'light', // ダークテーマにしたい場合は 'dark'
-    }).catch(error => {
-        console.error(`Failed to embed tweet ${tweetId}:`, error);
-        tweetContainer.textContent = 'ツイートの埋め込みに失敗しました。';
-    });
-}
-
-// 初期化処理
-function initializePage() {
-    initializeNavigation(); // ナビゲーション初期化
-    displayEmbeddedTweet(); // 最新ツイートの表示
-}
-
-// DOMの準備完了後に初期化を実行
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializePage);
-} else {
-    initializePage();
-}
-
-document.addEventListener("DOMContentLoaded", () => {
+// **ヒーロースライダーの初期化**
+function initializeSlider() {
     const slides = document.querySelectorAll(".hero-slider picture");
     let currentSlide = 0;
 
     function showNextSlide() {
-        slides[currentSlide].style.opacity = 0; // 現在のスライドをフェードアウト
-        currentSlide = (currentSlide + 1) % slides.length; // 次のスライドへ
-        slides[currentSlide].style.opacity = 1; // 次のスライドをフェードイン
+        slides[currentSlide].style.opacity = 0;
+        currentSlide = (currentSlide + 1) % slides.length;
+        slides[currentSlide].style.opacity = 1;
     }
 
-    setInterval(showNextSlide, 3000); // 5秒ごとに切り替え
-});
+    setInterval(showNextSlide, 3000);
+}
+
+// **ページの初期化**
+function initializePage() {
+    initializeNavigation();
+    displayEmbeddedTweet();
+    initializeSlider();
+}
+
+document.addEventListener("DOMContentLoaded", initializePage);
