@@ -163,3 +163,16 @@ if (document.readyState === 'loading') {
 } else {
     initializePage();
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const slides = document.querySelectorAll(".hero-slider picture");
+    let currentSlide = 0;
+
+    function showNextSlide() {
+        slides[currentSlide].style.opacity = 0; // 現在のスライドをフェードアウト
+        currentSlide = (currentSlide + 1) % slides.length; // 次のスライドへ
+        slides[currentSlide].style.opacity = 1; // 次のスライドをフェードイン
+    }
+
+    setInterval(showNextSlide, 3000); // 5秒ごとに切り替え
+});
