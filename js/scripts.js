@@ -32,25 +32,34 @@ function parseCSV(csvText) {
     return rows;
 }
 
-// ナビゲーション初期化
+// **ナビゲーション初期化**
 function initializeNavigation() {
     const menuToggle = document.querySelector('.menu-toggle');
+    const closeButton = document.querySelector('.close-button'); // メニュー内の閉じるボタン
     const navMenu = document.querySelector('.nav-menu');
     const body = document.body;
     const headerHeight = document.querySelector('.header').offsetHeight;
 
-    // メニューのトグル処理
-    menuToggle?.addEventListener('click', () => {
-        const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-        menuToggle.setAttribute('aria-expanded', !isExpanded);
-        navMenu?.setAttribute('aria-hidden', isExpanded);
+    // **メニュー開閉のトグル関数**
+    function toggleMenu() {
+        const isActive = navMenu.classList.contains('active');
+        menuToggle.setAttribute('aria-expanded', !isActive);
+        navMenu.setAttribute('aria-hidden', isActive);
 
         menuToggle.classList.toggle('active');
-        navMenu?.classList.toggle('active');
+        navMenu.classList.toggle('active');
         body.classList.toggle('menu-open');
+    }
+
+    // **メニューを開閉する処理**
+    menuToggle?.addEventListener('click', (event) => {
+        event.stopPropagation(); // 親要素への伝播を防ぐ
+        toggleMenu();
     });
 
-    // **メニュー項目をクリックしたらメニューを閉じる**
+    closeButton?.addEventListener('click', toggleMenu); // メニュー内の閉じるボタンの動作
+
+    // **メニュー内リンクをクリックしたら閉じる**
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
@@ -65,13 +74,18 @@ function initializeNavigation() {
                 });
             }
 
-            // **ここでメニューを閉じる処理を追加**
-            menuToggle?.setAttribute('aria-expanded', false);
-            navMenu?.setAttribute('aria-hidden', true);
-            menuToggle?.classList.remove('active');
-            navMenu?.classList.remove('active');
-            body.classList.remove('menu-open');
+            // **メニューを閉じる**
+            toggleMenu();
         });
+    });
+
+    // **メニュー外をクリックしたら閉じる**
+    document.addEventListener('click', (event) => {
+        if (!navMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+            if (navMenu.classList.contains('active')) {
+                toggleMenu();
+            }
+        }
     });
 }
 

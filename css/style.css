@@ -208,7 +208,20 @@ body {
     bottom: 0;
 }
 
-/* ハンバーガーメニューの開閉アニメーション */
+/* メニュー内の閉じるボタン */
+.close-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 30px;
+    height: 30px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1200;
+}
+
+/* 「ー」マークを表示 */
 .menu-toggle.active .menu-line:nth-child(1) {
     transform: translateY(10px) rotate(45deg);
 }
@@ -392,7 +405,7 @@ main {
 .info-item p {
     font-size: 1rem;
     color: #272727;
-    line-height: 1.6;
+    line-height: 2.0;
 }
 
 /* アクセス情報のマップスタイル */
