@@ -478,7 +478,7 @@ main {
     }
 
     .tweet-content {
-        max-height: 350px;
+        max-height: 700px;
         padding: 1rem;
     }
 }
