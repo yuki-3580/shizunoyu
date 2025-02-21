@@ -72,6 +72,18 @@ async function displayEmbeddedTweet() {
     const tweetContainer = document.getElementById('tweets-container');
     const latestTweetLink = await fetchLatestTweetLink();
 
+    // X（旧Twitter）のアカウントURL
+    const twitterProfileUrl = "https://x.com/shizu_zama";
+
+    // クリック時に X のプロフィールへ遷移する処理を追加
+    tweetContainer.style.cursor = "pointer";
+    tweetContainer.style.position = "relative";
+    tweetContainer.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        window.open(twitterProfileUrl, "_blank");
+    });
+
     if (!latestTweetLink) {
         tweetContainer.textContent = 'ツイートを取得できませんでした。';
         return;
@@ -83,10 +95,40 @@ async function displayEmbeddedTweet() {
         return;
     }
 
+    // ツイートのコンテナを作成
     const tweetDiv = document.createElement('div');
+    tweetDiv.style.position = "relative"; // ツイートを親要素に
     tweetContainer.appendChild(tweetDiv);
 
-    twttr.widgets.createTweet(tweetId, tweetDiv).catch(() => {
+    // ツイートを埋め込む
+    twttr.widgets.createTweet(tweetId, tweetDiv).then(() => {
+        setTimeout(() => {
+            // **ツイート内部のリンクを無効化（iframe も対象）**
+            tweetDiv.querySelectorAll('iframe').forEach(iframe => {
+                iframe.style.pointerEvents = 'none'; // クリック不能化
+            });
+
+            // **ツイートの上に透明なレイヤーを作成**
+            const overlay = document.createElement("div");
+            overlay.style.position = "absolute";
+            overlay.style.top = "0";
+            overlay.style.left = "0";
+            overlay.style.width = "100%";
+            overlay.style.height = "100%";
+            overlay.style.background = "rgba(255, 255, 255, 0)"; // 完全透明
+            overlay.style.zIndex = "10";
+            overlay.style.cursor = "pointer";
+
+            // 透明レイヤーをクリックで X に遷移
+            overlay.addEventListener("click", (event) => {
+                event.preventDefault();
+                event.stopPropagation();
+                window.open(twitterProfileUrl, "_blank");
+            });
+
+            tweetDiv.appendChild(overlay);
+        }, 1000); // 1秒後に実行（ツイート埋め込み後の遅延対策）
+    }).catch(() => {
         tweetContainer.textContent = 'ツイートの埋め込みに失敗しました。';
     });
 }
