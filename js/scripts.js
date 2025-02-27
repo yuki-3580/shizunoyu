@@ -67,22 +67,26 @@ function extractTweetId(tweetLink) {
     return tweetLink.match(/status\/(\d+)/)?.[1] || null;
 }
 
+// **X（旧Twitter）アプリでプロフィールページを開くための関数**
+function openTwitterProfile(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const twitterProfileUrl = "https://fxtwitter.com/shizu_zama"; // Xアプリに飛ばないURL
+    window.location.href = twitterProfileUrl;
+}
+
 // **最新ツイートを埋め込む**
 async function displayEmbeddedTweet() {
     const tweetContainer = document.getElementById('tweets-container');
     const latestTweetLink = await fetchLatestTweetLink();
 
-    // X（旧Twitter）のアカウントURL
-    const twitterProfileUrl = "https://x.com/shizu_zama";
-
-    // クリック時に X のプロフィールへ遷移する処理を追加
     tweetContainer.style.cursor = "pointer";
     tweetContainer.style.position = "relative";
-    tweetContainer.addEventListener("click", (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        window.open(twitterProfileUrl, "_blank");
-    });
+
+    // **クリック & タップイベントで X のアプリまたはWebを開く**
+    tweetContainer.addEventListener("click", openTwitterProfile);
+    tweetContainer.addEventListener("touchstart", openTwitterProfile); // スマホのタップ対応
 
     if (!latestTweetLink) {
         tweetContainer.textContent = 'ツイートを取得できませんでした。';
@@ -95,39 +99,34 @@ async function displayEmbeddedTweet() {
         return;
     }
 
-    // ツイートのコンテナを作成
+    // **ツイートを表示するコンテナ**
     const tweetDiv = document.createElement('div');
-    tweetDiv.style.position = "relative"; // ツイートを親要素に
+    tweetDiv.style.position = "relative";
     tweetContainer.appendChild(tweetDiv);
 
-    // ツイートを埋め込む
+    // **ツイートを埋め込む**
     twttr.widgets.createTweet(tweetId, tweetDiv).then(() => {
-        setTimeout(() => {
-            // **ツイート内部のリンクを無効化（iframe も対象）**
-            tweetDiv.querySelectorAll('iframe').forEach(iframe => {
-                iframe.style.pointerEvents = 'none'; // クリック不能化
-            });
+        // **ツイート内部の `iframe` を無効化**
+        tweetDiv.querySelectorAll('iframe').forEach(iframe => {
+            iframe.style.pointerEvents = 'none'; // クリック無効化
+        });
 
-            // **ツイートの上に透明なレイヤーを作成**
-            const overlay = document.createElement("div");
-            overlay.style.position = "absolute";
-            overlay.style.top = "0";
-            overlay.style.left = "0";
-            overlay.style.width = "100%";
-            overlay.style.height = "100%";
-            overlay.style.background = "rgba(255, 255, 255, 0)"; // 完全透明
-            overlay.style.zIndex = "10";
-            overlay.style.cursor = "pointer";
+        // **ツイートの上に透明なレイヤーを作成**
+        const overlay = document.createElement("div");
+        overlay.style.position = "absolute";
+        overlay.style.top = "0";
+        overlay.style.left = "0";
+        overlay.style.width = "100%";
+        overlay.style.height = "100%";
+        overlay.style.background = "rgba(255, 255, 255, 0)"; // 完全透明
+        overlay.style.zIndex = "10";
+        overlay.style.cursor = "pointer";
 
-            // 透明レイヤーをクリックで X に遷移
-            overlay.addEventListener("click", (event) => {
-                event.preventDefault();
-                event.stopPropagation();
-                window.open(twitterProfileUrl, "_blank");
-            });
+        // **透明レイヤーをクリック & タップで X に遷移**
+        overlay.addEventListener("click", openTwitterProfile);
+        overlay.addEventListener("touchstart", openTwitterProfile); // スマホ対応
 
-            tweetDiv.appendChild(overlay);
-        }, 1000); // 1秒後に実行（ツイート埋め込み後の遅延対策）
+        tweetDiv.appendChild(overlay);
     }).catch(() => {
         tweetContainer.textContent = 'ツイートの埋め込みに失敗しました。';
     });
